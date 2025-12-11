@@ -1,0 +1,21 @@
+Precompiling java code example.
+
+Compiling and running the test file without any compilation.
+
+javac Test.java
+java Test
+Print when a just in time compilation happens. Will by default happen after 1500 uses of a function.
+
+java -Xbatch -XX:+PrintCompilation Test
+Print the just in time compilation.
+
+java -Xbatch -XX:+PrintCompilation -XX:CompileCommandFile=.hotspot_compiler -XX:CompileThreshold=5 -XX:-TieredCompilation Test
+Use just in time compilation and use the disassembler to show the generated code.
+
+java -Xbatch -XX:+PrintCompilation -XX:CompileCommandFile=.hotspot_compiler -XX:CompileThreshold=5 -XX:-TieredCompilation -XX:+UnlockDiagnosticVMOptions -XX:+PrintAssembly Test
+Compile the test class to a ahead of time library file.
+
+jaotc --output=libTest.so Test.class
+Running ahead of time code.
+
+java -XX:AOTLibrary=./libTest.so -XX:+PrintAOT Test
